@@ -1,13 +1,17 @@
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        Thread thread1 = new Thread(new LazyPrimeFactorization(5000));
-        Thread thread2 = new Thread(new OptimizedPrimeFactorization(5000));
-        double start = System.currentTimeMillis();
+        LazyPrimeFactorization lazyPrimeFactorization =new LazyPrimeFactorization(5);
+
+        OptimizedPrimeFactorization optimezed = new OptimizedPrimeFactorization(5);
+
+        Thread thread1 = new Thread(lazyPrimeFactorization);
+
+        Thread thread2 = new Thread(optimezed);
+
         thread2.start();
         thread2.join();
         thread1.start();
         thread1.join();
-        double end = System.currentTimeMillis();
-        System.out.println("Đây là thời gian chạy "+ (end-start)+" miliseconds");
+        System.out.println("Thời gian tổng là: "+(lazyPrimeFactorization.sumTime+optimezed.sumTime));
     }
 }
